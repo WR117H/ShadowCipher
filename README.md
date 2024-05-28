@@ -16,5 +16,8 @@ You need:
 
 Now upload the esp8266.ino on the ESP8266
 and then run the python script
-```python ShadowCipher.py --port COM3(For example)```
+
+```usage: shadow-cipher.py [-h] --port PORT [--baud BAUD]```
+```shadow-cipher.py: error: the following arguments are required: --port```
+```python ShadowCipher.py --port COM3(For example) --baud 115200(for example)```
 
