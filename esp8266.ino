@@ -199,7 +199,6 @@ static void exec(char *cmdline)
           "show : Show content of recording buffer\r\n\r\n"
           "flush : Clear the recording buffer\r\n\r\n"
           "play <N> : Replay 0 = all frames or N-th recorded frame previously stored in the buffer.\r\n\r\n"
-          "rxraw <microseconds> : Sniffs radio by sampling with <microsecond> interval and prints received bytes in hex.\r\n\r\n"
           "recraw <microseconds> : Recording RAW RF data with <microsecond> sampling interval.\r\n"
             ));
           yield();
@@ -761,68 +760,68 @@ static void exec(char *cmdline)
         else { Serial.print(F("Wrong parameters.\r\n")); };
 
    // handling RXRAW command - sniffer
-    } else if (strcmp_P(command, PSTR("rxraw")) == 0) {
-        // take interval period for samplink
-        setting = atoi(cmdline);
-        if (setting>0)
-        {
-        // setup async mode on CC1101 with GDO0 pin processing
-        ELECHOUSE_cc1101.setCCMode(0); 
-        ELECHOUSE_cc1101.setPktFormat(3);
-        ELECHOUSE_cc1101.SetRx();
-        //start recording to the buffer with bitbanging of GDO0 pin state
-        Serial.print(F("\r\nSniffer enabled...\r\n"));
-        pinMode(gdo0, INPUT);      
+    // } else if (strcmp_P(command, PSTR("rxraw")) == 0) {
+    //     // take interval period for samplink
+    //     setting = atoi(cmdline);
+    //     if (setting>0)
+    //     {
+    //     // setup async mode on CC1101 with GDO0 pin processing
+    //     ELECHOUSE_cc1101.setCCMode(0); 
+    //     ELECHOUSE_cc1101.setPktFormat(3);
+    //     ELECHOUSE_cc1101.SetRx();
+    //     //start recording to the buffer with bitbanging of GDO0 pin state
+    //     Serial.print(F("\r\nSniffer enabled...\r\n"));
+    //     pinMode(gdo0, INPUT);      
 
-        // temporarly disable WDT for the time of recording
-        // ESP.wdtDisable();       
-       // Any received char over Serial port stops printing  RF received bytes
-        while (!Serial.available()) 
-           {  
+    //     // temporarly disable WDT for the time of recording
+    //     // ESP.wdtDisable();       
+    //    // Any received char over Serial port stops printing  RF received bytes
+    //     while (!Serial.available()) 
+    //        {  
              
-             // we have to use the buffer not to introduce delays
-             for (int i=0; i<RECORDINGBUFFERSIZE ; i++)  
-                { 
-                  byte receivedbyte = 0;
-                  for(int j=7; j > -1; j--)  // 8 bits in a byte
-                    {
-                       bitWrite(receivedbyte, j, digitalRead(gdo0));  // Capture GDO0 state into the byte
-                       delayMicroseconds(setting);                    // delay for selected sampling interval
-                    }; 
-                    // store the output into recording buffer
-                    bigrecordingbuffer[i] = receivedbyte;
-                    // feed the watchdog
-                    ESP.wdtFeed();
-                  }; 
-             // enable WDT 
-             // ESP.wdtEnable(5000);        
-             // feed the watchdog
-             ESP.wdtFeed();        
-             // needed for ESP8266   
-             yield();      
+    //          // we have to use the buffer not to introduce delays
+    //          for (int i=0; i<RECORDINGBUFFERSIZE ; i++)  
+    //             { 
+    //               byte receivedbyte = 0;
+    //               for(int j=7; j > -1; j--)  // 8 bits in a byte
+    //                 {
+    //                    bitWrite(receivedbyte, j, digitalRead(gdo0));  // Capture GDO0 state into the byte
+    //                    delayMicroseconds(setting);                    // delay for selected sampling interval
+    //                 }; 
+    //                 // store the output into recording buffer
+    //                 bigrecordingbuffer[i] = receivedbyte;
+    //                 // feed the watchdog
+    //                 ESP.wdtFeed();
+    //               }; 
+    //          // enable WDT 
+    //          // ESP.wdtEnable(5000);        
+    //          // feed the watchdog
+    //          ESP.wdtFeed();        
+    //          // needed for ESP8266   
+    //          yield();      
                   
-             // when buffer full print the ouptput to serial port
-             for (int i = 0; i < RECORDINGBUFFERSIZE ; i = i + 32)  
-                    { 
-                       asciitohex(&bigrecordingbuffer[i], textbuffer,  32);
-                       Serial.print((char *)textbuffer);
-                       // feed the watchdog
-                       ESP.wdtFeed();
-                       // needed foe ESP8266                    
-                       yield();
-                    };
+    //          // when buffer full print the ouptput to serial port
+    //          for (int i = 0; i < RECORDINGBUFFERSIZE ; i = i + 32)  
+    //                 { 
+    //                    asciitohex(&bigrecordingbuffer[i], textbuffer,  32);
+    //                    Serial.print((char *)textbuffer);
+    //                    // feed the watchdog
+    //                    ESP.wdtFeed();
+    //                    // needed foe ESP8266                    
+    //                    yield();
+    //                 };
                     
  
-           }; // end of While loop
+    //        }; // end of While loop
            
-        Serial.print(F("\r\nStopping the sniffer.\n\r\n"));
+    //     Serial.print(F("\r\nStopping the sniffer.\n\r\n"));
         
-        // setting normal pkt format again
-        ELECHOUSE_cc1101.setCCMode(1); 
-        ELECHOUSE_cc1101.setPktFormat(0);
-        ELECHOUSE_cc1101.SetRx();
-        }
-        else { Serial.print(F("Wrong parameters.\r\n")); };
+    //     // setting normal pkt format again
+    //     ELECHOUSE_cc1101.setCCMode(1); 
+    //     ELECHOUSE_cc1101.setPktFormat(0);
+    //     ELECHOUSE_cc1101.SetRx();
+    //     }
+    //     else { Serial.print(F("Wrong parameters.\r\n")); };
 
 
     // handling PLAYRAW command
