@@ -30,12 +30,6 @@ It has similar functionality to YardStick One but is cheaper and does not need s
 >   <li>Comming soon ...</li>
 > </ul></details>
 
-### Wiring
-
-
-Now upload the esp8266.ino on the ESP8266
-and then run the python script
-
 ### Useage
 `usage: shadow-cipher.py [-h] --port PORT [--baud BAUD] `
 
