@@ -19,10 +19,10 @@ It has similar functionality to YardStick One but is cheaper and does not need s
 > <details><summary><code>D.I.Y Method</code></summary><ul>
 >   <br>
 >   <li>Just connect an CC1101 to ESP8266 by the schematic link below</li>
->   <li>https://github.com/WR117H/ShadowCipher/assets/97615989/6da47cfb-2334-4604-b99e-271cfd8e5fa5</li>
-  
 >   <br>
->   <li>by using ```python setup.py --port [port] --baud [baud]``` You can just update or install the ShadowCipher firmware on your device </li>
+>   <li>https://github.com/WR117H/ShadowCipher/assets/97615989/6da47cfb-2334-4604-b99e-271cfd8e5fa5</li>
+>   <br>
+>   <li>by using `python setup.py --port [port] --baud [baud]` You can just update or install the ShadowCipher firmware on your device </li>
 
 > </ul></details>
 
