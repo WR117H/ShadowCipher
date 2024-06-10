@@ -15,12 +15,17 @@ Allows using CLI to control CC1101 board over USB interface. Putty or any other 
 </br>
 It has similar functionality to YardStick One but is cheaper and does not need specialized software. Allows for RF jamming and replay attacks as well. It has RAW recording/replaying function which works exactly the same as in the Flipper Zero. Additional function is Radio Chat communicator
 
-### What do we need?
-You need:
-   cc1101 x 01
-   ESP8266 x 01
+### How to build one?
+> <details><summary><code>D.I.Y Method</code></summary><ul>
+>   <br>
+>   <li>Just connect an CC1101 to ESP8266 by this schem ![Esp8266_CC1101](https://github.com/WR117H/ShadowCipher/assets/97615989/6da47cfb-2334-4604-b99e-271cfd8e5fa5) </li>
+>   <br>
+>   <li>by using ```python setup.py --port [port] --baud [baud]``` You can just update or install the ShadowCipher firmware on your device/li>
+
+> </ul></details>
+
 ### Wiring
-![Esp8266_CC1101](https://github.com/WR117H/ShadowCipher/assets/97615989/6da47cfb-2334-4604-b99e-271cfd8e5fa5)
+
 
 Now upload the esp8266.ino on the ESP8266
 and then run the python script
