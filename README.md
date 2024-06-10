@@ -28,6 +28,7 @@ and then run the python script
 ### Useage
 `usage: shadow-cipher.py [-h] --port PORT [--baud BAUD] 
 shadow-cipher.py: error: the following arguments are required: --port`
+
 ### Commands
 Following commands are available :
 
@@ -125,8 +126,8 @@ Following commands are available :
     
     init                         // Restarts CC1101 board with default parameters 
 
-```python ShadowCipher.py --port COM3(For example) --baud 115200(for example)```
 
+### About
 This project is an edited version of this repo
 [mcore1976/cc1101-tool](https://github.com/mcore1976/cc1101-tool)
 
