@@ -7,7 +7,7 @@
   <img src="https://github.com/WR117H/ShadowCipher/assets/97615989/ed26123b-1de1-44cc-9a72-c4e027f4042d">
 </p>
 
-
+An rf tool based on CC1101 module and esp8266/rp2040.
 Allows using CLI to control CC1101 board over USB interface. Putty or any other serial terminal can be used. It has similar functionality to YardStick One but is cheaper and does not need specialized software. Allows for RF jamming and replay attacks as well. It has RAW recording/replaying function which works exactly the same as in the Flipper Zero. Additional function is Radio Chat communicator
 
 
