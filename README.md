@@ -26,8 +26,7 @@ Now upload the esp8266.ino on the ESP8266
 and then run the python script
 
 ### Useage
-`usage: shadow-cipher.py [-h] --port PORT [--baud BAUD] 
-shadow-cipher.py: error: the following arguments are required: --port`
+`usage: shadow-cipher.py [-h] --port PORT [--baud BAUD] `
 
 ### Commands
 Following commands are available :
