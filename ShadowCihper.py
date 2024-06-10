@@ -1,96 +1,54 @@
-import os
 import serial
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.collections import LineCollection
 import time
-import termplotlib as tpl
-from colorama import Fore,init
-freq433_streak=0
-freq315_streak=0
-init()
-def DELAY(x):
-   time.sleep(x)
-timestamps = []
-rssi_list = []
-def read_serial_data(rssi_list):
-    for rssi_data in rssi_list:
-        yield rssi_data
+import os
+import threading
+from function import banner
 
-def banner():
-    os.system("cls||clear")
-    header = """
-  _________.__                .___            _________ .__       .__                  
- /   _____/|  |__ _____     __| _/______  _  _\\_   ___ \\|__|_____ |  |__   ___________ 
- \\_____  \\ |  |  \\\\__  \\   / __ |/  _ \\ \\/ \\/ /    \\  \\/|  \\____ \\|  |  \\_/ __ \\_  __ \\
- /        \\|   Y  \\/ __ \\_/ /_/ (  <_> )     /\\     \\___|  |  |_> >   Y  \\  ___/|  | \\/
-/_______  /|___|  (____  /\\____ |\\____/ \\/\\_/  \\______  /__|   __/|___|  /\\___  >__|   
-        \\/      \\/     \\/      \\/                     \\/   |__|        \\/     \\/       
-"""
-    print(header)
-    print("[c] ShadowCipher - 2024\n")
-def seriall():
-    # Set up the serial port (Replace 'COM3' with the appropriate port for your setup)
-    ser = serial.Serial('COM3', 115200)  # Change 'COM3' to your port name
+# Replace 'COM4' with your port name (e.g., '/dev/ttyUSB0' for Linux or 'COM4' for Windows)
+SERIAL_PORT = 'COM4'
+BAUD_RATE = 115200
+TIMEOUT = 1  # Timeout for read operations
 
+# Initialize serial connection
+ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=TIMEOUT)
+
+def send_command(command):
+    """ Send a command to the Arduino and return the response. """
+    ser.write((command + '\r').encode())  # Send command without extra newline
+
+def read_serial():
+    """ Continuously read from the serial port and print the output. """
+    while True:
+        if ser.in_waiting > 0:
+            try:
+                response = ser.readline().decode('utf-8').strip()
+                if response:
+                    print(response)
+            except Exception as e:
+                print(f"Error reading serial data: {e}")
+
+try:
+    banner.ban()
+    print("[?] Starting the communication. Type 'exit' to end.")
+    # Start reading the serial output in a separate thread
+    read_thread = threading.Thread(target=read_serial)
+    read_thread.daemon = True
+    read_thread.start()
     
-    print("""[1] rxraw\n[2] scan\n""")
-    option=int(input("Choose an option > "))
-    banner()
-    if option == 1:
-        ser.write(b'A\n')
-        try:
-            while True:
-                if ser.in_waiting > 0:
-                    line = ser.readline().decode('utf-8').rstrip()
-                    print(line)
-        except KeyboardInterrupt:
-            print("\nExiting...")
-    elif option == 2:
-        ser.write(b'B\n')
-        try:
-            while True:
-                if ser.in_waiting > 0:
-                    DL=False
-                    # Read RSSI data from serial port
-                    rssi = int(ser.readline().decode().strip())
-                    rssi_list.append(rssi)  
-                                        # Set thresholds for each frequency
-                    threshold_433 = -50  # Adjust this threshold as needed
-                    threshold_315 = -70  # Adjust this threshold as needed
-                    frequency=""
-                    # Check if RSSI corresponds to 433 MHz or 315 MHz
-                    if rssi > threshold_433:
-                        frequency = "433 MHz"
+    while True:
+        command = input()
+        if command.lower() == 'exit':
+            break
+        elif command.lower() == 'banner':
+            banner.ban()
+        elif command.lower() == 'clear':
+            os.system('cls' if os.name == 'nt' else 'clear')
+        else:
+            send_command(command)
+        
+except KeyboardInterrupt:
+    print("Interrupted by user")
 
-                    elif rssi > threshold_315:
-                        frequency = "315 MHz"
-
-                    # Print ASCII representation of RSSI
-                    rssi=(f"{'*'* (rssi // 10)} ({rssi})")
-                    
-                    if frequency == "433 MHz" and freq433_streak == 0:
-
-                      print(Fore.LIGHTGREEN_EX+"\n[*] "+Fore.RESET+rssi+f"{[frequency]}")
-                    elif frequency == "315 MHZ" and freq315_streak == 0:
-                      print(Fore.LIGHTCYAN_EX+"\n[*] "+rssi+f"{[frequency]}")  
-                    else:
-                      print('\r'+"[*] "+rssi, end='')  
-                    if frequency == "433 MHz":
-
-                        freq433_streak =+ 1
-                        freq315_streak = 0
-                    elif frequency == "315 MHz":
-
-                        freq315_streak =+ 1
-                        freq433_streak = 0
-                    else: 
-                        freq315_streak = 0 
-                        freq433_streak = 0
-                                      
-                        
-        except KeyboardInterrupt:
-        #    plot
-if __name__=="__main__":
-    banner()
-    seriall()
+finally:
+    ser.close()  # Close the serial connection
+    print("Serial connection closed.")
