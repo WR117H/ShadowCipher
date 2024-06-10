@@ -1,5 +1,5 @@
 # ShadowCipher
-![Group 3 (4)]()
+
 <p align="center">
   <img src="https://github.com/WR117H/ShadowCipher/assets/97615989/8e35e70d-bc5e-45b4-8b68-823f4a2b43b3">
 </p>
