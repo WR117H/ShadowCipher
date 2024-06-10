@@ -25,6 +25,10 @@ It has similar functionality to YardStick One but is cheaper and does not need s
 >   <li>by using `python setup.py --port [port] --baud [baud]` You can just update or install the ShadowCipher firmware on your device </li>
 
 > </ul></details>
+> <details><summary><code>ShadowCipher pcb</code></summary><ul>
+>   <br>
+>   <li>Comming soon ...</li>
+> </ul></details>
 
 ### Wiring
 
