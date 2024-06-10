@@ -1,7 +1,7 @@
 # ShadowCipher
 
 <p align="center">
-  <img src="https://github.com/WR117H/ShadowCipher/assets/97615989/8e35e70d-bc5e-45b4-8b68-823f4a2b43b3">
+  <img width="220" height="102" src="https://github.com/WR117H/ShadowCipher/assets/97615989/8e35e70d-bc5e-45b4-8b68-823f4a2b43b3">
 </p>
 <p align="center">
   <img src="https://github.com/WR117H/ShadowCipher/assets/97615989/ed26123b-1de1-44cc-9a72-c4e027f4042d">
