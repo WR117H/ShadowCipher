@@ -31,3 +31,6 @@ shadow-cipher.py: error: the following arguments are required: --port`
 
 ```python ShadowCipher.py --port COM3(For example) --baud 115200(for example)```
 
+This project is an edited version of this repo
+[mcore1976](https://github.com/mcore1976/cc1101-tool)
+
