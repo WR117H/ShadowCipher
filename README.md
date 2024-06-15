@@ -4,7 +4,8 @@
   <img width="220" height="102" src="https://github.com/WR117H/ShadowCipher/assets/97615989/b993fda5-5655-4a4e-96eb-31e3f90dd756" >
 </p>
 <p align="center">
-  <img src="https://github.com/WR117H/ShadowCipher/assets/97615989/ed26123b-1de1-44cc-9a72-c4e027f4042d">
+  <img src="https://github.com/WR117H/ShadowCipher/assets/97615989/1d2341fd-8c21-40e1-9246-126a74c39225">
+
 </p>
 
 An rf tool based on CC1101 module and esp8266/rp2040.
