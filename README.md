@@ -25,7 +25,7 @@ It has similar functionality to YardStick One but is cheaper and does not need s
 >   <br>
 >   <li>https://github.com/WR117H/ShadowCipher/assets/97615989/6da47cfb-2334-4604-b99e-271cfd8e5fa5</li>
 >   <br>
->   <li>by using `python setup.py --port [port] --baud [baud]` You can just update or install the ShadowCipher firmware on your device </li>
+>   <li>by using `python setup.py --port [port] --update True` You can just update or install the ShadowCipher firmware on your device </li>
 
 > </ul></details>
 > <details><summary><code>ShadowCipher pcb</code></summary><ul>
