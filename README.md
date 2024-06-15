@@ -2,9 +2,11 @@
 
 <p align="center">
   <img width="220" height="102" src="https://github.com/WR117H/ShadowCipher/assets/97615989/b993fda5-5655-4a4e-96eb-31e3f90dd756" >
+  
 </p>
 <p align="center">
-  <img src="https://github.com/WR117H/ShadowCipher/assets/97615989/1d2341fd-8c21-40e1-9246-126a74c39225">
+
+  <img src="https://github.com/WR117H/ShadowCipher/assets/97615989/fc82034d-eedc-4a04-af8e-9e0fb5be9ce4">
 
 </p>
 
@@ -34,11 +36,29 @@ It has similar functionality to YardStick One but is cheaper and does not need s
 ### Useage
 
 
-### Commands
-Following attacks are available :
-`capture: It records the raw data frequency and it can play it after recording
-sniffing: It can read the signals
-scan: It can find the frequency
-graph: It shows the rssi graph on the display
-`
+### Following attacks are available
+
+
+<p align="center">
+  <img src="https://github.com/WR117H/ShadowCipher/assets/97615989/fc82034d-eedc-4a04-af8e-9e0fb5be9ce4">
+</p>
+
+`capture: It records the raw data frequency and it can play it after recording`
+
+<p align="center">
+
+  <img src="https://github.com/WR117H/ShadowCipher/assets/97615989/fc82034d-eedc-4a04-af8e-9e0fb5be9ce4">
+
+</p>
+
+`sniffing: It can read the signals`
+
+<p align="center">
+  <img src="https://github.com/WR117H/ShadowCipher/assets/97615989/cbaa6186-0684-49d7-83c0-ae99c946a0f9">
+</p>
+
+`scan: It can find the frequency`
+
+`graph: It shows the rssi graph on the display`
+
 
