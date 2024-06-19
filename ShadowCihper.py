@@ -20,13 +20,11 @@ connection_group.add_argument('-b', '--baud', type=int, default=9600, help="Baud
 connection_group.add_argument('-a', '--attack', help="Baud rate (default: 9600)")
 # Initial parse to check for setup flag
 args = parser.parse_args()
-
+is_arg=False
 option=0
-
 recorder_buffer=[]
 freq433_streak=0
 freq315_streak=0
-
 init()
 
 def DELAY(x):
@@ -36,7 +34,6 @@ rssi_list = []
 def read_serial_data(rssi_list):
     for rssi_data in rssi_list:
         yield rssi_data
-
 def banner():
     os.system("cls||clear")
     header = """
@@ -58,7 +55,9 @@ def seriall(port,baud,attack):
 
     # print("""[1] rxraw\n[2] graph\n""")
     # option=int(input("Choose an option > "))
-    banner()
+    if is_arg:
+
+       banner()
     try:
 
        ser = serial.Serial(port, baud, timeout=1)
@@ -149,31 +148,13 @@ def seriall(port,baud,attack):
                            
                            recorder_buffer.append(line)
                    else:
-                       print(f'[APP] {line}')
+                       print(f'{line}')
 
 
 
-            play=input("[INPUT] Do you wanna play the raw(Yes/Y,No/N) > ")
-            if play.lower()=="yes" or play.lower()=="y":
-               ser.write(b'E\n')
-               try:
-                  while True:
 
-                      line = ser.readline().decode('utf-8', errors='ignore').rstrip()
-                      if line == "" or line == " " or line == "\n":
-                          pass
-                      elif line == "Replaying RAW data complete." :
-                          print(f'[APP] {line}')
-                          break
-                      else:
-                        print(f'[APP] {line}')
-               except KeyboardInterrupt:
-              #  plot
-                None
-            else:
-               save=input("[INPUT] Do you wanna save the raw(Yes/Y,No/N) > ")
-               if save.lower()=="yes" or save.lower()=="y":
-                   None
+
+
                    
                        
 
@@ -212,16 +193,117 @@ def seriall(port,baud,attack):
                 if line == "" or line == " " or line == "\n":
                     pass
                 else:
+                   if line == 'End':
+                      break
                    print(line)
+
         except KeyboardInterrupt:
         #  plot
            None
     # else:
     elif attack==6:
         ser.write(b'J\n')
+    elif attack==7:
+        ser.write(b'S\n')
+        try:
+            while True:
+
+                line = ser.readline().decode('utf-8').rstrip()
+                if line == "" or line == " " or line == "\n":
+                    pass
+                else:
+                   if line == 'End':
+                      break
+                   print(line)
+
+        except KeyboardInterrupt:
+        #  plot
+           None 
+    elif attack==8:
+        ser.write(b'L\n')
+        try:
+            while True:
+
+                line = ser.readline().decode('utf-8').rstrip()
+                if line == "" or line == " " or line == "\n":
+                    pass
+                else:
+                   if line == 'End':
+                      break
+                   print(line)
+
+        except KeyboardInterrupt:
+        #  plot
+           None 
     # else:
     #     print(attack)
+    elif attack==9:
+        ser.write(b'Z\n')
+        try:
+            while True:
 
+                line = ser.readline().decode('utf-8').rstrip()
+                if line == "" or line == " " or line == "\n":
+                    pass
+                else:
+                   if line == 'End':
+                      break
+                   print(line)
+        except KeyboardInterrupt:
+        #  plot
+           None 
+    elif attack==10:
+        ser.write(b'X\n')
+        try:
+            while True:
+
+                line = ser.readline().decode('utf-8').rstrip()
+                if line == "" or line == " " or line == "\n":
+                    pass
+                else:
+                   if line == 'End':
+                      break
+                   print(line)
+        except KeyboardInterrupt:
+        #  plot
+           None 
+    elif attack==11:
+        ser.write(b'Y\n')
+        try:
+            while True:
+
+                line = ser.readline().decode('utf-8').rstrip()
+                if line == "" or line == " " or line == "\n":
+                    pass
+                else:
+                   if line == 'End':
+                      break
+                   print(line)
+        except KeyboardInterrupt:
+        #  plot
+           None 
+    elif attack==12:
+        ser.write(b'G\n')
+        try:
+            while True:
+
+                line = ser.readline().decode('utf-8').rstrip()
+                if line == "" or line == " " or line == "\n":
+                    pass
+                else:
+                   if line == 'End':
+                      break
+                   print(line)
+
+        except KeyboardInterrupt:
+        #  plot
+           None 
+    # else:
+    #     print(attack)
+def command():
+    prompt=input("sh1 > ")
+    
+    return prompt
 if __name__=="__main__":
 
     banner()
@@ -229,21 +311,73 @@ if __name__=="__main__":
        print("Setting up ShadowCipher...")
        # Add your setup logic here
     elif args.port and args.baud:
+        if str(args.attack) != 'None':
+            is_arg=True
 
-        if args.attack == "replay":
 
-          #  seriall(args.port, args.baud,4)
-           exit()
-        elif args.attack == "sniffing":
+            if args.attack == "replay":
 
-           seriall(args.port, args.baud,1)
-        elif args.attack == "scan":
-           seriall(args.port, args.baud,2)
-        elif args.attack == "capture":
-           seriall(args.port, args.baud,3)
-           exit()
- 
-        elif args.attack == "graph":
-            seriall(args.port, args.baud,5)
-        elif args.attack == "jammer": 
-            seriall(args.port, args.baud,6)
+            #  seriall(args.port, args.baud,4)
+               exit()
+            elif args.attack == "sniffing":
+                print("[*] Sniffing")
+                seriall(args.port, args.baud,1)
+            elif args.attack == "scan":
+             seriall(args.port, args.baud,2)
+            elif args.attack == "capture":
+              seriall(args.port, args.baud,3)
+              exit()
+    
+            elif args.attack == "graph":
+                 seriall(args.port, args.baud,5)
+            elif args.attack == "jammer": 
+                seriall(args.port, args.baud,6)
+        else:
+            while True:
+                try:
+
+                    prompt=command()
+                    if prompt == "replay":
+
+                        seriall(args.port, args.baud,4)
+                    elif prompt == "sniffing":
+                        print("[*] Sniffing")
+                        seriall(args.port, args.baud,1)
+                    elif prompt == "scan":
+                        seriall(args.port, args.baud,2)
+                    elif prompt == "capture":
+                        seriall(args.port, args.baud,3)
+                    
+                    elif prompt == "graph":
+                        seriall(args.port, args.baud,5)
+                    elif prompt == "jammer": 
+                        seriall(args.port, args.baud,6)
+                    elif prompt=="show":
+                        seriall(args.port, args.baud,7)
+                    elif prompt=="flush":
+                        seriall(args.port, args.baud,8)
+                    elif prompt[0:14]=="set modulation":
+                        if prompt[15:] == "AM270":
+                           seriall(args.port, args.baud,9)
+                        elif prompt[15:] == "AM650":
+                           seriall(args.port, args.baud,10)
+                        elif prompt[15:] == "FM238":
+                           seriall(args.port, args.baud,11)
+                        elif prompt[15:] == "FM476":
+                           seriall(args.port, args.baud,12)
+                        else:print("There is only AM270, AM650, FM238 and FM476")
+
+
+
+                    elif prompt == "exit": 
+                       break
+                    elif prompt == "clear":
+                        banner()
+
+                    else:
+                        print(f"[!] Wrong command:{prompt}.")
+
+                except:
+                    print("\n[?] You can exit by the 'exit' command.")
+                    pass
+            exit()
